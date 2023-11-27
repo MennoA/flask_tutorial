@@ -66,6 +66,7 @@ def login():
         flash(error)
     return render_template('auth/login.html')
 
+# the function is registered that runs before the view function
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -76,3 +77,8 @@ def load_logged_in_user():
         g.user = get_db().execute(
             'SELECT * FROM user WHERE id = ?', (user_id)
         ).fetchone()
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
