@@ -32,8 +32,9 @@ def register():
             except db.IntegrityError:
                 error = f"User {username} is already registered."
             else:
+                # redirect to the login page, url_for generate the URL for the login view based on its name.
                 return redirect(url_for("auth.login"))
-            
+        # error is shown to the user. stores messages that can be retrieved when rendering the template    
         flash(error)
-
+    # html page for register either its succeed or failed
     return render_template('auth/register.html')
