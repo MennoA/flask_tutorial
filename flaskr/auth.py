@@ -1,3 +1,4 @@
+# authentication blueprint will have views to register new users and to login and log out
 import functools
 
 from flask import (
