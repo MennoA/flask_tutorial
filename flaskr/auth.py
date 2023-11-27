@@ -83,6 +83,7 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+# decorator to check if the user is logged in, redirect to log in page if this is not the case
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
