@@ -47,6 +47,7 @@ def login():
         password = request.form['password']
         db = get_db()
         error = None
+        # return one row from the query or None
         user = db.execute(
             'SELECT * FROM user WHERE usersname = ?', (username,)
         ).fetchone()
@@ -56,6 +57,7 @@ def login():
         elif not check_password_hash(user['password'], password):
             error = 'Incorrect password.'
 
+        # session is a dict that stores data across requests. When validation succeeds, the user's id is stored in a new session. The data is stored in a cookie that is sent to the browser, and the browser send it back with subsequent requests.
         if error is None:
             session.clear()
             session['user_id'] = user['id']
